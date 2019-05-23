@@ -1,0 +1,53 @@
+
+R version 3.5.1 (2018-07-02) -- "Feather Spray"
+Copyright (C) 2018 The R Foundation for Statistical Computing
+Platform: x86_64-w64-mingw32/x64 (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+[Previously saved workspace restored]
+
+> setwd("C:/Users/NAYANA NAIR/documents/cert/data")
+> ata_full <- read.csv("household_power_consumption.txt", header=T, sep=';', na.strings="?", 
++                       nrows=2075259, check.names=F, stringsAsFactors=F, comment.char="", quote='\"')
+> data1 <- subset(data_full, Date %in% c("1/2/2007","2/2/2007"))
+Error in subset(data_full, Date %in% c("1/2/2007", "2/2/2007")) : 
+  object 'data_full' not found
+> data1$Date <- as.Date(data1$Date, format="%d/%m/%Y")
+Error in as.Date(data1$Date, format = "%d/%m/%Y") : 
+  object 'data1' not found
+> datetime <- paste(as.Date(data1$Date), data1$Time)
+Error in as.Date(data1$Date) : object 'data1' not found
+> data1$Datetime <- as.POSIXct(datetime)
+Error in as.POSIXct(datetime) : object 'datetime' not found
+> 
+> with(data1, {
++   plot(Sub_metering_1~Datetime, type="l",
++        ylab="Global Active Power (kilowatts)", xlab="")
++   lines(Sub_metering_2~Datetime,col='Red')
++   lines(Sub_metering_3~Datetime,col='Blue')
++ })
+Error in with(data1, { : object 'data1' not found
+> legend("topright", col=c("black", "red", "blue"), lty=1, lwd=2, 
++        legend=c("Sub_metering_1", "Sub_metering_2", "Sub_metering_3"))
+Error in strwidth(legend, units = "user", cex = cex, font = text.font) : 
+  plot.new has not been called yet
+> dev.copy(png, file="plot3.png", height=480, width=480)
+png 
+  3 
+> dev.off()
+windows 
+      2 
+> 
